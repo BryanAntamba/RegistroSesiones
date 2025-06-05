@@ -1,63 +1,93 @@
-
 package global.service;
 
-import global.Repository.ArticuloRepositoryJdbcImplement;
 import global.models.Articulo;
-
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// Implementación de la interfaz ArticuloService usando JDBC
 public class ArticuloServiceJdbcImplements implements ArticuloService {
+    private Connection conn;
 
-    // Repositorio que gestiona las operaciones con la base de datos
-    private ArticuloRepositoryJdbcImplement repositoryJdbc;
-
-    // Constructor que recibe una conexión JDBC y crea una instancia del repositorio
     public ArticuloServiceJdbcImplements(Connection conn) {
-        this.repositoryJdbc = new ArticuloRepositoryJdbcImplement(conn);
+        this.conn = conn;
     }
 
-    // Devuelve una lista de todos los artículos activos
-    @Override
-    public List<Articulo> listar() {
-        try {
-            return repositoryJdbc.lista();
-        } catch (SQLException e) {
-            // Lanza una excepción personalizada si ocurre un error en la base de datos
-            throw new ServiceJdbcException(e.getMessage(), e.getCause());
-        }
-    }
-
-    // Busca un artículo por su ID y lo devuelve como Optional
-    @Override
-    public Optional<Articulo> porId(Long idArticulo) {
-        try {
-            return Optional.ofNullable(repositoryJdbc.porId(idArticulo));
-        } catch (SQLException e) {
-            throw new ServiceJdbcException(e.getMessage(), e.getCause());
-        }
-    }
-
-    // Guarda un nuevo artículo o actualiza uno existente
     @Override
     public void guardar(Articulo articulo) {
-        try {
-            repositoryJdbc.guardar(articulo);
+        String sql;
+        if (articulo.getIdArticulo() != null && articulo.getIdArticulo() > 0) {
+            sql = "UPDATE articulo SET idcategoria=?, codigo=?, nombre=?, stock=?, " +
+                  "descripcion=?, imagen=?, condicion=? WHERE idarticulo=?";
+        } else {
+            sql = "INSERT INTO articulo (idcategoria, codigo, nombre, stock, " +
+                  "descripcion, imagen, condicion) VALUES (?,?,?,?,?,?,?)";
+        }
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, articulo.getIdCategoria());
+            stmt.setString(2, articulo.getCodigo());
+            stmt.setString(3, articulo.getNombre());
+            stmt.setInt(4, articulo.getStock());
+            stmt.setString(5, articulo.getDescripcion());
+            stmt.setString(6, articulo.getImagen());
+            stmt.setInt(7, articulo.getCondicion());
+
+            if (articulo.getIdArticulo() != null && articulo.getIdArticulo() > 0) {
+                stmt.setLong(8, articulo.getIdArticulo());
+            }
+
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+            throw new ServiceJdbcException("Error al guardar el artículo", e);
         }
     }
 
-    // Elimina (o cambia el estado lógico) de un artículo por su ID
     @Override
-    public void eliminar(Integer idArticulo) {
-        try {
-            repositoryJdbc.eliminar(idArticulo);
+    public Optional<Articulo> porId(Long id) {
+        Articulo articulo = null;
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT * FROM articulo WHERE idarticulo = ?")) {
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    articulo = new Articulo();
+                    articulo.setIdArticulo(rs.getInt("idarticulo"));
+                    articulo.setIdCategoria(rs.getLong("idcategoria"));
+                    articulo.setCodigo(rs.getString("codigo"));
+                    articulo.setNombre(rs.getString("nombre"));
+                    articulo.setStock(rs.getInt("stock"));
+                    articulo.setDescripcion(rs.getString("descripcion"));
+                    articulo.setImagen(rs.getString("imagen"));
+                    articulo.setCondicion(rs.getInt("condicion"));
+                }
+            }
         } catch (SQLException e) {
-            throw new ServiceJdbcException(e.getMessage(), e.getCause());
+            throw new ServiceJdbcException("Error al obtener el artículo por ID", e);
         }
+        return Optional.ofNullable(articulo);
+    }
+
+    @Override
+    public List<Articulo> listar() {
+        List<Articulo> articulos = new ArrayList<>();
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM articulo")) {
+            while (rs.next()) {
+                Articulo articulo = new Articulo();
+                articulo.setIdArticulo(rs.getInt("idarticulo"));
+                articulo.setIdCategoria(rs.getLong("idcategoria"));
+                articulo.setCodigo(rs.getString("codigo"));
+                articulo.setNombre(rs.getString("nombre"));
+                articulo.setStock(rs.getInt("stock"));
+                articulo.setDescripcion(rs.getString("descripcion"));
+                articulo.setImagen(rs.getString("imagen"));
+                articulo.setCondicion(rs.getInt("condicion"));
+                articulos.add(articulo);
+            }
+        } catch (SQLException e) {
+            throw new ServiceJdbcException("Error al listar los artículos", e);
+        }
+        return articulos;
     }
 }
