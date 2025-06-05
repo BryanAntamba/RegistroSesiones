@@ -1,0 +1,100 @@
+/* Fondo de naturaleza con overlay oscuro */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #f9f9f9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background-color: rgba(34, 49, 63, 0.85);
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.8rem;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Estilo de grupos de campos */
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #d0f0c0;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Inputs */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 8px #a6e22e;
+    background-color: #2e3e2f;
+    color: #fff;
+}
+
+/* Estilo para inputs con error */
+.input-error {
+    border: 2px solid #ff6b6b;
+    background-color: #3e2f2f;
+    color: #fddede;
+}
+
+/* Mensajes de error */
+.error-msg {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-top: 6px;
+    display: block;
+}
+
+/* Botón de envío */
+.btn-submit {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #4caf50;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #6bd26b;
+    box-shadow: 0 0 25px #6bd26b;
+    transform: scale(1.05);
+}

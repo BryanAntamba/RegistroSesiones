@@ -12,44 +12,49 @@
   }
 %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/styles.css">
-  <title>Formulario Categoria</title>
+  <meta charset="UTF-8">
+  <title>Formulario Categoría</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/formularioCategoria.css">
 </head>
 <body>
-<h1>Formulario Categoria</h1>
+<div class="form-container">
+  <h1>Formulario Categoría</h1>
 
-<form action="<%=request.getContextPath()%>/categoria" method="post">
-  <input type="hidden" name="idCategoria" value="<%= categoria.getIdCategoria() != null ? categoria.getIdCategoria() : "" %>">
+  <form action="<%=request.getContextPath()%>/categoria" method="post" class="categoria-form">
+    <input type="hidden" name="idCategoria" value="<%= categoria.getIdCategoria() != null ? categoria.getIdCategoria() : "" %>">
 
-  <div>
-    <label for="nombre">Ingrese el nombre de categoría *</label><br>
-    <input type="text"
-           id="nombre"
-           name="nombre"
-           value="<%= categoria.getNombre() != null ? categoria.getNombre() : "" %>">
-    <br>
-    <% if(errores.get("nombre") != null) { %>
-    <span style="color: red"><%= errores.get("nombre") %></span>
-    <% } %>
-  </div>
-  <br>
-  <div>
-    <label for="descripcion">Ingrese la descripción *</label><br>
-    <input type="text"
-           id="descripcion"
-           name="descripcion"
-           value="<%= categoria.getDescripcion() != null ? categoria.getDescripcion() : "" %>">
-    <br>
-    <% if(errores.get("descripcion") != null) { %>
-    <span style="color: red"><%= errores.get("descripcion") %></span>
-    <% } %>
-  </div>
-  <br>
-  <div>
-    <input type="submit" value="<%=(categoria.getIdCategoria() != null && categoria.getIdCategoria() > 0) ? "Editar" : "Crear" %>">
-  </div>
-</form>
+    <div class="form-group">
+      <label for="nombre">Ingrese el nombre de categoría *</label>
+      <input type="text"
+             id="nombre"
+             name="nombre"
+             value="<%= categoria.getNombre() != null ? categoria.getNombre() : "" %>"
+             class="<%= errores.get("nombre") != null ? "input-error" : "" %>">
+      <% if(errores.get("nombre") != null) { %>
+      <span class="error-msg"><%= errores.get("nombre") %></span>
+      <% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="descripcion">Ingrese la descripción *</label>
+      <input type="text"
+             id="descripcion"
+             name="descripcion"
+             value="<%= categoria.getDescripcion() != null ? categoria.getDescripcion() : "" %>"
+             class="<%= errores.get("descripcion") != null ? "input-error" : "" %>">
+      <% if(errores.get("descripcion") != null) { %>
+      <span class="error-msg"><%= errores.get("descripcion") %></span>
+      <% } %>
+    </div>
+
+    <div class="form-group">
+      <input type="submit"
+             value="<%=(categoria.getIdCategoria() != null && categoria.getIdCategoria() > 0) ? "Editar" : "Crear" %>"
+             class="btn-submit">
+    </div>
+  </form>
+</div>
 </body>
 </html>

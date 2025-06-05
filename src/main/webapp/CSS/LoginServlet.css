@@ -1,0 +1,88 @@
+/* Fondo llamativo de naturaleza con capa oscura */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    color: white;
+}
+p{
+    color: white;
+}
+
+/* Contenedor de bienvenida */
+.welcome-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px 35px;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-container h1 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+}
+
+.welcome-container p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* Botón estilo enlace */
+a.btn-home {
+    text-decoration: none;
+    display: inline-block;
+    background: #6c63ff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 0 rgba(108, 99, 255, 0.7);
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+a.btn-home:hover {
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.8);
+    transform: scale(1.05);
+    background: #5848f5;
+}
+/* Botón tipo enlace con efecto de zoom e iluminación blanca */
+a.btn-zoom {
+    display: inline-block;
+    background-color: #6c63ff;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+a.btn-zoom:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 18px 4px rgba(255, 255, 255, 0.9);
+}
+
+

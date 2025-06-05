@@ -1,4 +1,5 @@
 package global.controllers;
+import com.google.protobuf.DescriptorProtos;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -27,17 +28,20 @@ public class LoginServlet extends HttpServlet {
 
         if (usernameOptional.isPresent()) {
             resp.setContentType("text/html;charset=UTF-8");
-            try(PrintWriter out = resp.getWriter()) {
-                //Creo la plantilla html
+            try (PrintWriter out = resp.getWriter()) {
                 out.print("<!DOCTYPE html>");
-                out.println("<html>");
+                out.println("<html lang='es'>");
                 out.println("<head>");
-                out.println("<meta charset=\"utf-8\">");
-                out.println("<title>Hola usuario " + usernameOptional.get() +"</title>");
+                out.println("<meta charset='utf-8'>");
+                out.println("<title>Bienvenido " + usernameOptional.get() + "</title>");
+                out.println("<link rel='stylesheet' href='" + req.getContextPath() + "/CSS/LoginServlet.css'>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("<h1>Hola "+usernameOptional.get()+" ya iniciaste sesión anteriormente!</h1>");
-                out.println("<p><a href='"+req.getContextPath()+"/index.html'>Volver al inicio</a></p>");
+                out.println("<div class='card'>");
+                out.println("<h1>¡Hola, " + usernameOptional.get() + "!</h1>");
+                out.println("<p class='mensaje'>Has iniciado sesión correctamente.</p>");
+                out.println("<a class='btn-zoom' href='" + req.getContextPath() + "/index.html'>Volver al inicio</a>");
+                out.println("</div>");
                 out.println("</body>");
                 out.println("</html>");
             }

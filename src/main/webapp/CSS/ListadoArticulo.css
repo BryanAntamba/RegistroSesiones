@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+.welcome-msg {
+    color: #a6e22e;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 5px #000;
+}
+
+.btn-add {
+    display: inline-block;
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    display: block;
+    width: fit-content;
+}
+.btn-add:hover {
+    background-color: #6bd26b;
+    box-shadow: 0 0 20px #6bd26b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+th {
+    background: rgba(70, 130, 70, 0.8);
+    color: #e0f2f1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+tr:hover {
+    background: rgba(166, 226, 46, 0.3);
+    cursor: pointer;
+}
+
+td {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.inactivo {
+    background-color: rgba(255, 50, 50, 0.2);
+    color: #ffdcdc;
+}
+
+.acciones a {
+    color: #a6e22e;
+    font-weight: 600;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.acciones a:hover {
+    color: #dfff8f;
+    text-shadow: 0 0 8px #dfff8f;
+}
+
+.btn-regresar {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 12px 30px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.btn-regresar:hover {
+    background-color: #6bd26b;
+    box-shadow: 0 0 20px #6bd26b;
+    transform: scale(1.05);
+}

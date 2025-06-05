@@ -45,25 +45,30 @@ public class ProductosServlet extends HttpServlet{
         PrintWriter out = resp.getWriter();
 
         // 5. Comenzar a generar la estructura HTML
+        // 5. Comenzar a generar la estructura HTML
         out.print("<!DOCTYPE html>");
-        out.println("<html>");
+        out.println("<html lang='es'>");
         out.println("<head>");
-        out.println("<meta charset=\"utf-8\">");  // Especificar encoding
-        out.println("<link rel=\"stylesheet\" href=\"css/Main.css\">");
+        out.println("<meta charset='utf-8'>");  // Especificar encoding
+        out.println("<link rel='stylesheet' href='" + req.getContextPath() + "/CSS/Productos.css'>");
         out.println("<title>Lista de Productos</title>");  // Título de la pestaña
         out.println("</head>");
         out.println("<body>");
 
-        // 6. Título principal de la página
+        out.println("<div class='container'>");
+
+// 6. Título principal de la página
         out.println("<h1>Lista de productos</h1>");
         if(logeo){
-            out.println("<h3>Hola querido " + usernameOptional.get() + "</h3>");
+            out.println("<h3 class='saludo'>Hola querido " + usernameOptional.get() + "</h3>");
         }
-        // 7. Crear tabla para mostrar los productos
-        out.println("<table border='1'>");  // Tabla con borde visible
 
-        // 8. Encabezados de la tabla
-        out.println("<tr>");  // Fila de encabezado
+// 7. Crear tabla para mostrar los productos
+        out.println("<table class='tabla-productos'>");
+
+// 8. Encabezados de la tabla
+        out.println("<thead>");
+        out.println("<tr>");
         out.println("<th>ID PRODUCTO</th>");
         out.println("<th>NOMBRE</th>");
         out.println("<th>CATEGORIA</th>");
@@ -71,23 +76,31 @@ public class ProductosServlet extends HttpServlet{
             out.println("<th>PRECIO</th>");
         }
         out.println("</tr>");
+        out.println("</thead>");
 
-        // 9. Iterar sobre la lista de productos y generar filas de la tabla
+// 9. Iterar sobre la lista de productos y generar filas de la tabla
+        out.println("<tbody>");
         productos.forEach(p -> {
-            out.println("<tr>");  // Nueva fila por cada producto
-            out.println("<td>" + p.getId() + "</td>");  // Celda con ID
-            out.println("<td>" + p.getNombre() + "</td>");  // Celda con nombre
-            out.println("<td>" + p.getTipo() + "</td>");  // Celda con categoría/tipo
+            out.println("<tr>");
+            out.println("<td>" + p.getId() + "</td>");
+            out.println("<td>" + p.getNombre() + "</td>");
+            out.println("<td>" + p.getTipo() + "</td>");
             if(logeo){
                 out.println("<td>" + p.getPrecio() + "</td>");
             }
             out.println("</tr>");
         });
+        out.println("</tbody>");
 
-        // 10. Cerrar tabla y estructura HTML
+// 10. Cerrar tabla y estructura HTML
         out.println("</table>");
+
+        out.println("<a class='btn-volver' href='" + req.getContextPath() + "/index.html'>Volver al inicio</a>");
+        out.println("</div>");
+
         out.println("</body>");
         out.println("</html>");
+
     }
 
 }
